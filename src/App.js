@@ -12,12 +12,13 @@ function App() {
         <Routes>
           {/* home */}
           <Route path="/" element={<HomePage />} />
+          <p>shihyun</p>
           {/* <Route path="/create" element={<PostCreatePage />} /> */}
         </Routes>
         <Footer />
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
 export default App;
