@@ -4,6 +4,7 @@ const dexList = [
     invest : false,
     title: "interest",
     values: {
+
       1 : 0.056,
       2 : 0.135,
     },    
@@ -33,6 +34,7 @@ const dexList = [
       1 : 1400,
       2 : 2000,
       3 : 2100,
+
     },
     time : "2023-02-04T07:42:50.658501Z",
     description : "short description",
@@ -70,9 +72,63 @@ const dexList = [
     invest : true,
     title: "kospi",
     values: {
-      1 : 1400,
-      2 : 2000,
-      3 : 2100,
+      1: 1400,
+      2: 2000,
+      3: 2100,
+    },
+  },
+  {
+    id: 2,
+    title: "kospi",
+    values: {
+      1: 1400,
+      2: 2000,
+      3: 2100,
+    },
+  },
+  {
+    id: 2,
+    title: "kospi",
+    values: {
+      1: 1400,
+      2: 2000,
+      3: 2100,
+    },
+  },
+  {
+    id: 2,
+    title: "kospi",
+    values: {
+      1: 1400,
+      2: 2000,
+      3: 2100,
+    },
+  },
+  {
+    id: 2,
+    title: "kospi",
+    values: {
+      1: 1400,
+      2: 2000,
+      3: 2100,
+    },
+  },
+  {
+    id: 2,
+    title: "kospi",
+    values: {
+      1: 1400,
+      2: 2000,
+      3: 2100,
+    },
+  },
+  {
+    id: 2,
+    title: "kospi",
+    values: {
+      1: 1400,
+      2: 2000,
+      3: 2100,
     },
     time : "2023-02-04T07:42:50.658501Z",
     description : "short description",

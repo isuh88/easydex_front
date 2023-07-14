@@ -1,3 +1,5 @@
+@tailwind utilities;
+
 .App {
   overflow-x: hidden;
   box-sizing: border-box;
@@ -6,4 +8,35 @@
   margin: 0;
   align-items: center;
   height: 100%;
+}
+
+.main-input {
+  @apply input;
+  width: 1150px;
+  margin: 100px 20px 20px 20px;
+}
+
+.mainLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.imsisquare {
+  width: 250px !important;
+  height: 250px !important;
+  border-radius: 10% !important;
+  border: 1px solid black !important;
+  background-color: white !important;
+  margin: 20px 10px !important;
+  color: blue !important;
+}
+
+.mainBlocks {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+  width: 1200px;
+  justify-content: space-around;
 }

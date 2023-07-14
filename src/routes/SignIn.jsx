@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DexBlock } from "../components/DexBlock";
 import dexList from "../data/dex";
 
-const CustomPage = () => {
+const SignInPage = () => {
   const [dexes, setPostList] = useState(dexList);
 
   const handleChange = (e) => {};
@@ -19,4 +19,4 @@ const CustomPage = () => {
   );
 };
 
-export default CustomPage;
+export default SignInPage;
