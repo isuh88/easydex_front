@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { DexBlock } from "../components/DexBlock";
 import dexList from "../data/dex";
 import { BigBlock,SmallBlock } from "../components/Block";
+
 import axios from "axios"
 import { getPosts } from "../apis/api";
+
 
 const HomePage = () => {
 
@@ -31,7 +33,6 @@ const HomePage = () => {
           <>
           <SmallBlock dex={dex} />
           <BigBlock dex={dex}/>
-          
           </>
         ))}
       </div>

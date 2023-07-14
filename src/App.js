@@ -3,11 +3,11 @@ import Footer from "./components/Footer";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./routes/HomePage";
+import BigBlockPage from "./routes/BigBlockPage";
 import SignUpPage from "./routes/SignUpPage";
 import SignInPage from "./routes/SignInPage";
 import BigBlockPage from "./routes/BigBlockPage";
 import MyPage from "./routes/MyPage";
-
 
 function App() {
   return (
