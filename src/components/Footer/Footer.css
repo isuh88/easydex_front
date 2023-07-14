@@ -19,3 +19,51 @@ footer .copyright-container .copyright {
   font-size: 16px;
   font-weight: bold;
 }
+
+.footer-logos {
+  justify-content: end;
+  align-items: end;
+  padding: 20px 20px 80px 20px;
+}
+
+.footer-logo {
+  height: 60px !important;
+}
+
+.layout {
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.blocks {
+  max-width: 60%;
+}
+
+.footer-routes {
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-between;
+  padding: 20px 20px 80px 20px;
+}
+
+.footer-routes .footer-route {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: start;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 100px 10px 0;
+}
+
+.footer-link {
+  @apply link;
+  padding: 3px 0;
+}
+
+.footer-real-title {
+  @apply footer-title;
+  font-size: 18px;
+}
+
+.sizedBox {
+  width: 250px;
+}
