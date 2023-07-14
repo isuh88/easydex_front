@@ -1,12 +1,25 @@
 /** @type {import('tailwindcss').Config} */
 
+
 module.exports = {
   content: [
     "./src/**/*.{html,js}",
     "./node_modules/tw-elements/dist/js/**/*.js",
+    "./src/**/*.{js,jsx,ts,tsx}"
   ],
   plugins: [require("daisyui")],
   darkMode: "class",
+  theme: {
+    extend: {
+      colors : {
+        'dexname' : '#061BD8CC',
+        'invest_tag' : '#061BD8',
+        'economy_tag' : '#A05D0E',
+
+
+      }
+    },
+  },
   daisyui: {
     themes: true, // true: all themes | false: only light + dark | array: specific themes like this ["light", "dark", "cupcake"]
     darkTheme: "night", // name of one of the included themes for dark mode
@@ -18,3 +31,4 @@ module.exports = {
     logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
   },
 };
+
