@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPosts, getUserProfile } from "../apis/api";
+import { getUserProfile } from "../apis/api";
 import { MyPageForm } from "../components/Form";
 
 const MyPage = () => {
@@ -30,11 +30,11 @@ const MyPage = () => {
     };
     getUserProfileAPI();
 
-    const getPostsAPI = async () => {
-      const postList = await getPosts();
-      setPostList(postList);
-    };
-    getPostsAPI();
+    // const getPostsAPI = async () => {
+    //   const postList = await getPosts();
+    //   setPostList(postList);
+    // };
+    // getPostsAPI();
   }, []);
 
   return (

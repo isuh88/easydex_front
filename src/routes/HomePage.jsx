@@ -2,20 +2,19 @@ import { useState, useEffect } from "react";
 import { DexBlock } from "../components/DexBlock";
 import dexList from "../data/dex";
 import { BigBlock,SmallBlock } from "../components/Block";
-import axios from "axios"
-import { getPosts } from "../apis/api";
+import { getDexes } from "../apis/api";
 
 const HomePage = () => {
 
-  const [dexes, setPostList] = useState(dexList);
-	// useEffect(() => {
-	// 	const getPostsAPI = async () => {
-	// 		const posts = await getPosts();
-  //     setPostList(posts);
-  //   };
-  //   getPostsAPI();
-	// }, []);
-  // console.log(dexes);
+  const [dexes, setDexList] = useState(dexList);
+	useEffect(() => {
+		const getDexesAPI = async () => {
+			const dexes = await getDexes();
+      setDexList(dexes);
+    };
+    getDexesAPI();
+	}, []);
+  console.log(dexes);
 
 
   const handleChange = (e) => {};
