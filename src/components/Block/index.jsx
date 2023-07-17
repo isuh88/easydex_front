@@ -9,7 +9,8 @@ export const SmallBlock = ({dex}) =>{
 //taglist 만들어서 click시 연결 되도록
 // smallblock name에 bitblock으로 이어지는 코드 작성 요
     const onClickWatch = () => {
-        watchDex(dex.id + 3);
+        console.log(dex.id);
+        watchDex(dex.id);
     };
 
 return(
