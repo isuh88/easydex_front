@@ -89,13 +89,22 @@ export const logOut = async (token) => {
 export const getDexes = async () => {
   const response = await instance.get("/dexmanager/");
   //Tag에 대한 형변환을 getDexes에서 한 번에 처리함
-  const tags = response.data.map(
-    function(data) {
+  response.data.map(
+    function(data) {      
       const jsonTags = data.tags;
       const sortedKeys = Object.keys(jsonTags).sort((a, b) => jsonTags[a] - jsonTags[b]);
       const tagKeys = sortedKeys.map(Number);
       data.tags = tagKeys;
     });
+
+  //전체 종가를 update하겠다.
+  const keys = Object.keys(response.data);
+  const idArray = keys.map(key => response.data[key].id);
+  
+  for (let i = 0; i < idArray.length; i++) {
+    pullDexHistory(idArray[i]);
+  }
+  
   return response.data;
 };
 
@@ -104,15 +113,24 @@ export const getDex = async (id) => {
   return response.data;
 };
 
-// export const createPost = async (data, navigate) => {
-//   const response = await instanceWithToken.post("/dexmanager/", data);
-//   if (response.status === 201) {
-//     console.log("POST SUCCESS");
-//     navigate("/");
-//   } else {
-//     console.log("[ERROR] error while creating post");
-//   }
-// };
+export const pullDexes = async () => {
+  const response = await instance.post("/dexmanager/");
+  if (response.status === 200 || response.status === 201) {
+    // console.log("POST SUCCESS");
+  } else {
+    // console.log("[ERROR] error while creating post");
+  }
+};
+
+export const pullDexHistory = async (id) => {
+  const response = await instance.post(`/dexmanager/${id}/`);
+  if (response.status === 200 || response.status === 201) {
+    // console.log("POST SUCCESS");
+    // console.log(response);
+  } else {
+    console.log("[ERROR] error while creating post");
+  }
+};
 
 // export const updatePost = async (id, data, navigate) => {
 //   const response = await instanceWithToken.patch(`/post/${id}/`, data);
@@ -134,11 +152,11 @@ export const getDex = async (id) => {
 //   }
 // };
 
-export const watchDex = async (postId) => {
-  const response = await instanceWithToken.post(`/post/${postId}/like/`);
-  if (response.status === 200) {
-    console.log("POST Like SUCCESS");
-    window.location.reload();
+export const watchDex = async (dexId) => {
+  const response = await instanceWithToken.post(`/dexmanager/${dexId}/userdex/`);
+  if (response.status === 200 || response.status === 201) {
+    console.log(response);
+    // window.location.reload();
   } else {
     console.log("[ERROR] error while deleting post");
   }

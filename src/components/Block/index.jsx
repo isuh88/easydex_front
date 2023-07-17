@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import dexList from "../../data/dex";
 import { Tag } from "./tag";
+import { watchDex } from "../../apis/api";
 
 
 
 export const SmallBlock = ({dex}) =>{
 //taglist 만들어서 click시 연결 되도록
 // smallblock name에 bitblock으로 이어지는 코드 작성 요
-
+    const onClickWatch = () => {
+        watchDex(dex.id + 3);
+    };
 
 return(
     dex.invest ? (
@@ -20,6 +23,12 @@ return(
                     <a className="italic font-semibold underline" href="http://www.naver.com">hyper link</a>
                 </div>
                 <p>{dex.description}</p>
+            </div>
+            <div
+                className="absolute bottom-3 left-4 cursor-pointer"
+                onClick={onClickWatch}
+            >
+                ❤️
             </div>
             <div className="flex-col">
                 {dex.tags.map( (id) => (
