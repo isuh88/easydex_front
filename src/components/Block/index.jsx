@@ -3,6 +3,7 @@ import dexList from "../../data/dex";
 import { Tag } from "./tag";
 import { useState } from "react";
 import ModalBasic from "./modalBasic";
+import { watchDex } from "../../apis/api";
 
 export const SmallBlock = ({ dex }) => {
   //taglist 만들어서 click시 연결 되도록
@@ -12,8 +13,16 @@ export const SmallBlock = ({ dex }) => {
     setModalOpen(true);
   };
 
-  function getRandom(length) {
-    return Math.floor(Math.random() * length);
+
+
+function getRandom (length){
+  return Math.floor(Math.random() * (length))};
+var randomTag = [];
+if (dex.tags.length){
+  randomTag.push(getRandom(dex.tags.length))
+  randomTag.push(getRandom(dex.tags.length))
+  while(randomTag[0] == randomTag[1]){
+    randomTag[1] = getRandom(dex.tags.length)
   }
   var randomTag = [];
   if (dex.tags.length) {
