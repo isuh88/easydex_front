@@ -14,7 +14,7 @@ const Footer = () => {
           from Likelion_SNU
         </p>
       </div>
-      <div className="sizedBox"></div>
+
       <div className="footer-routes">
         <div className="footer-route">
           <span className="footer-real-title">Services</span>

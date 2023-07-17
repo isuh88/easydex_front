@@ -23,7 +23,7 @@ footer .copyright-container .copyright {
 .footer-logos {
   justify-content: end;
   align-items: end;
-  padding: 20px 20px 80px 20px;
+  padding: 20px 100px 80px 0;
 }
 
 .footer-logo {
@@ -42,7 +42,7 @@ footer .copyright-container .copyright {
 .footer-routes {
   grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
-  padding: 20px 20px 80px 20px;
+  padding: 20px 200px 80px 0;
 }
 
 .footer-routes .footer-route {
@@ -51,7 +51,7 @@ footer .copyright-container .copyright {
   align-items: start;
   justify-content: center;
   text-align: center;
-  padding: 10px 100px 10px 0;
+  padding: 10px 0 10px 100px;
 }
 
 .footer-link {

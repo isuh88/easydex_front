@@ -12,7 +12,8 @@
 
 .main-input {
   @apply input;
-  width: 1150px;
+  max-width: 1150px;
+  width: 100%;
   margin: 100px 20px 20px 20px;
 }
 
@@ -26,17 +27,19 @@
 }
 
 .imsisquare {
-  width: 250px !important;
-  height: 250px !important;
+  width: 270px !important;
+  height: 270px !important;
   border-radius: 10% !important;
   border: 1px solid black !important;
   background-color: white !important;
-  margin: 20px 10px !important;
+  margin: 8px 5px !important;
   color: blue !important;
 }
 
 .mainBlocks {
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
-  width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  max-width: 1200px;
+  width: 100%;
   justify-content: space-around;
 }
