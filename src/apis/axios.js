@@ -53,7 +53,7 @@ instanceWithToken.interceptors.response.use(
   async (error) => {
     // 서버가 오류를 응답했을 때 처리 - 콘솔 찍어주고, 프론트에게 보내지 않고 오류를 발생시킴
     console.log("Response Error!!");
-    // console.log(error);
+    console.log(error);
 
     const originalRequest = error.config;
     if (error.response.status === 401) {

@@ -3,6 +3,7 @@ import dexList from "../../data/dex";
 import { Tag } from "./tag";
 import { useState } from "react";
 import ModalBasic from "./modalBasic";
+import { watchDex } from "../../apis/api";
 
 export const SmallBlock = ({ dex }) => {
   //taglist 만들어서 click시 연결 되도록
@@ -11,7 +12,6 @@ export const SmallBlock = ({ dex }) => {
   const showModal = () => {
     setModalOpen(true);
   };
-
 
 
 function getRandom (length){
@@ -46,6 +46,37 @@ console.log(randomTag);
               >
                 {dex.title}
               </Link>
+
+export const SmallBlock = ({dex}) =>{
+//taglist 만들어서 click시 연결 되도록
+// smallblock name에 bitblock으로 이어지는 코드 작성 요
+    const onClickWatch = () => {
+        console.log(dex.id);
+        watchDex(dex.id);
+    };
+
+return(
+    dex.invest ? (
+    <div className="w-[365px] h-[250px] mx-10 my-5 p-1 items-center justify-center bg-gradient-to-br rounded from-dexname/80">
+    <div className="smallblock relative flex flex-col bg-white ">
+        <div className="w-full flex flex-row flex-nowrap justify-between">
+            <div className="w-1/2 flex flex-col">
+                <div className="flex flex-row justify-between">
+                <Link to={'/Bigblock/' + dex.id} state = {{istag : false}} className="dexname">{dex.title}</Link>
+                    <a className="italic font-semibold underline" href="http://www.naver.com">hyper link</a>
+                </div>
+                <p>{dex.description}</p>
+            </div>
+            <div
+                className="absolute bottom-3 left-4 cursor-pointer"
+                onClick={onClickWatch}
+            >
+                ❤️
+            </div>
+            <div className="flex-col">
+                {dex.tags.map( (id) => (
+                    <Tag id={id} dexid={dex.id}/>
+                ))}
             </div>
             <p>{dex.value}</p>
           </div>
