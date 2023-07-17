@@ -37,12 +37,10 @@ const HomePage = () => {
     getDexesAPI();
   }, []);
 
-
   const handleChange = (e) => {};
   //className="grid grid-cols-4 px-10 mt-10"
   return (
     <div>
-
       <div className="mainLayout">
         <div className="form-control">
           <input
@@ -58,17 +56,6 @@ const HomePage = () => {
             ))}
           </div>{" "}
         </div>
-
-      This is HomePage
-      <div>
-        {dexes.map((dex) => (
-          //<DexBlock key={dex.id} dex={dex} />
-          <>
-            <SmallBlock dex={dex} />
-            <BigBlock dex={dex} />
-          </>
-        ))}
-
       </div>
     </div>
   );
