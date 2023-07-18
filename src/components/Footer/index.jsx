@@ -21,20 +21,20 @@ const Footer = () => {
           <a className="footer-link link-hover" href="/dexlist">
             DexList
           </a>
-          <a className="footer-link link-hover">Design</a>
-          <a className="footer-link link-hover">Marketing</a>
-          <a className="footer-link link-hover">Advertisement</a>
         </div>
         <div className="footer-route">
           <span className="footer-real-title">Company</span>
-          <a className="footer-link link-hover">About us</a>
+          <a
+            className="footer-link link-hover"
+            href="https://www.instagram.com/likelion_snu/"
+          >
+            About us
+          </a>
           <a className="footer-link link-hover">Contact</a>
         </div>
         <div className="footer-route">
           <span className="footer-real-title">Legal</span>
           <a className="footer-link link-hover">Terms of use</a>
-          <a className="footer-link link-hover">Privacy policy</a>
-          <a className="footer-link link-hover">Cookie policy</a>
         </div>
       </div>
     </footer>

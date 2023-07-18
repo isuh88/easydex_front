@@ -36,10 +36,16 @@ const Header = () => {
           <div className="flex">
             {!isUser ? (
               <>
-                <Link to="/signin" className="mr-10 p-3 uppercase">
+                <Link
+                  to="/signin"
+                  className="btn btn-ghost mr-10 p-3 uppercase"
+                >
                   sign In
                 </Link>
-                <Link to="/signup" className="mr-10 p-3 uppercase">
+                <Link
+                  to="/signup"
+                  className="btn btn-ghost mr-10 p-3 uppercase"
+                >
                   sign up
                 </Link>
               </>

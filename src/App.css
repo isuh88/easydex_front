@@ -43,3 +43,17 @@
   width: 100%;
   justify-content: space-around;
 }
+
+.dexlist {
+  padding: 50px 0;
+  max-width: 2000px;
+  width: 100%;
+}
+
+.dexlist-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

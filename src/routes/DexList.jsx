@@ -9,13 +9,8 @@ const DexListPage = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-4 px-10 mt-10">
-        {dexes.map((dex) => (
-          <DexBlock key={dex.id} dex={dex} />
-        ))}
-      </div>
-      <div class="flex flex-col">
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="flex flex-col dexlist-layout">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8 dexlist">
           <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
             <div class="overflow-hidden">
               <table class="min-w-full text-left text-sm font-light">
