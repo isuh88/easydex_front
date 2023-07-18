@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import dexList from "../../data/dex";
 import { Tag } from "./tag";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import ModalBasic from "./modalBasic";
-import { watchDex } from "../../apis/api";
+import { watchDex,getDexes,getDexesAPI,pullDexes } from "../../apis/api";
 
 export const SmallBlock = ({ dex }) => {
   //taglist 만들어서 click시 연결 되도록
@@ -23,28 +23,14 @@ export const SmallBlock = ({ dex }) => {
     while (randomTag[0] == randomTag[1]) {
       randomTag[1] = getRandom(dex.tags.length);
     }
-    var randomTag = [];
-    if (dex.tags.length) {
-      randomTag.push(getRandom(dex.tags.length));
-      randomTag.push(getRandom(dex.tags.length));
-      while (randomTag[0] == randomTag[1]) {
-        randomTag[1] = getRandom(dex.tags.length);
-      }
-    }
+
     console.log(randomTag);
     return dex.invest ? (
-      <>
-        {modalOpen && (
-          <ModalBasic setModalOpen={setModalOpen} className="z-50" />
-        )}
         <div className="card w-[300px] h-[300px]  p-1 m-10  items-center justify-center bg-gradient-to-br rounded">
           <div className="smallblock relative flex flex-col bg-white ">
             <div className="px-2 py-1 flex justify-between">
-              <div className="tooltip" data-tip="이건 뭐게">
-                <button className="" onClick={showModal}>
+              <div className="tooltip" data-tip="흰색 block은 투자지표이고 갈색 block은 경제지표입니다">
                   🙌
-                </button>
-                {/* {modalOpen && <ModalBasic setModalOpen={setModalOpen} className="w-300[px]/> h-200[px] z-20 border-solid border-4 bg-black"/>} */}
               </div>
               <button
                 className="btn btn-xs"
@@ -83,19 +69,12 @@ export const SmallBlock = ({ dex }) => {
             </div>
           </div>
         </div>
-      </>
     ) : (
-      <>
-        {modalOpen && (
-          <ModalBasic setModalOpen={setModalOpen} className="z-50" />
-        )}
         <div className="card w-[300px] h-[300px] p-1 m-10 items-center justify-center bg-gradient-to-br rounded from-economy_tag/10">
           <div className="smallblock relative flex flex-col bg-white ">
             <div className="px-2 py-1 flex justify-between">
-              <div className="tooltip" data-tip="이건 뭐게">
-                <button className="" onClick={showModal}>
+              <div className="tooltip" data-tip="흰색 block은 투자지표이고 갈색 block은 경제지표입니다">
                   🙌
-                </button>
               </div>
               <button
                 className="btn btn-xs"
@@ -134,7 +113,6 @@ export const SmallBlock = ({ dex }) => {
             </div>
           </div>
         </div>
-      </>
     );
   }
 };
@@ -143,32 +121,50 @@ export const BigBlock = ({ dex }, index) => {
   //taglist 만들어서 click시 연결 되도록
   //index는 이전에 클릭 된 개체의 id를 의미 dex는 Big block 내용에 들어올 dex 의미
   // index와 dex id가 같으면 이전과의 관계 필요 x
+  
+  // 이부분에 dexlist 가져오고 dex또한 필요
+  // const [dexes, setDexList] = useState(dexList);
+  // useEffect(() => {
+  //   const getDexesAPI = async () => {
+  //     await pullDexes();
+  //     const dexes = await getDexes();
+  //     setDexList(dexes);
+  //   };
+  //   getDexesAPI();
+  // }, []);
+
+
+
 
   const [modalOpen, setModalOpen] = useState(false);
   const showModal = () => {
     setModalOpen(true);
   };
 
-  const fromhome = dex.id == index ? true : false;
+
   var tagDexarr = [];
   dex.tags.map((id) => {
     tagDexarr.push(dexList.find((dex) => dex.id === id));
   });
 
+// 추후 tag인지 smallblcok에서 왔는지 구분할때 필요
+  const fromhome = dex.id == index ? true : false;
+
   return (
-    <>
-      {modalOpen && <ModalBasic setModalOpen={setModalOpen} className="z-50" />}
       <div className="flex flex-col">
         {dex.invest ? (
           <div className="self-center w-[755px] h-[460px] p-1 items-center justify-center bg-gradient-to-br rounded">
             <div className="bigblock relative flex flex-col bg-white">
               <div className="px-2 py-1 flex justify-between">
-                <button className="btn" onClick={showModal}>
+              <div className="tooltip" data-tip="흰색 block은 투자지표이고 갈색 block은 경제지표입니다">
                   🙌
-                </button>
-                <button className="btn" onClick={() => console.log("❤️ 눌림")}>
-                  ❤️
-                </button>
+              </div>
+              <button
+                className="btn btn-xs"
+                onClick={() => console.log("❤️ 눌림")}
+              >
+                ❤️
+              </button>
               </div>
               <div className="flex flex-col justify-between">
                 <Link
@@ -194,12 +190,15 @@ export const BigBlock = ({ dex }, index) => {
           <div className="self-center w-[755px] h-[460px] p-1 items-center justify-center bg-gradient-to-br rounded from-economy_tag/80">
             <div className="bigblock relative flex flex-col bg-white">
               <div className=" flex justify-between">
-                <button className="btn" onClick={showModal}>
+              <div className="tooltip" data-tip="흰색 block은 투자지표이고 갈색 block은 경제지표입니다">
                   🙌
-                </button>
-                <button className="btn" onClick={() => console.log("❤️ 눌림")}>
-                  ❤️
-                </button>
+              </div>
+              <button
+                className="btn btn-xs"
+                onClick={() => console.log("❤️ 눌림")}
+              >
+                ❤️
+              </button>
               </div>
               <div className="flex flex-rcol justify-between p-5">
                 <Link
@@ -226,6 +225,5 @@ export const BigBlock = ({ dex }, index) => {
           ))}
         </div>
       </div>
-    </>
   );
 };
