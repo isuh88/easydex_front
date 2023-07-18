@@ -6,6 +6,7 @@ import axios from "axios";
 import { BigBlock, SmallBlock } from "../components/Block";
 import { getDexes, pullDexes, getUser, watchDex } from "../apis/api";
 import { getCookie } from "../utils/cookie";
+import EasyDEXlogo from "../assets/images/EasyDEX_logo.png";
 
 const HomePage = () => {
   const [dexes, setDexList] = useState(dexList);
@@ -52,6 +53,11 @@ const HomePage = () => {
   return (
     <div>
       <div className="mainLayout">
+        <div>
+          <Link to="/">
+            <img src={EasyDEXlogo} className="mainPageLogo" />
+          </Link>
+        </div>
         <div className="form-control">
           <input
             type="text"
