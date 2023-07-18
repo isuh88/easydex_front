@@ -12,9 +12,13 @@
 
 .main-input {
   @apply input;
-  max-width: 1150px;
   width: 100%;
-  margin: 100px 20px 20px 20px;
+  margin: 20px;
+}
+
+.form-control {
+  max-width: 800px !important;
+  width: 80%;
 }
 
 .mainLayout {
@@ -56,4 +60,10 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.mainPageLogo {
+  width: 100%;
+  max-width: 300px;
+  margin: 50px auto;
 }
