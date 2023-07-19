@@ -24,7 +24,7 @@ export const Tag = ({ id }, { dexid }) => {
 //이 부분은 완성되면 지워도 됩니다.
     console.log("tagid 찾기");
     console.log(tagid);
-    const dex = dexList[id];
+    const dex = dexList[id-1];
     // const dex = dexList.find(dex => dex.id == id);
     console.log("확인");
     console.log(dex);

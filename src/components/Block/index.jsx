@@ -4,10 +4,13 @@ import { Tag } from "./tag";
 import { useState,useEffect } from "react";
 import ModalBasic from "./modalBasic";
 import { watchDex,getDexes,getDexesAPI,pullDexes } from "../../apis/api";
+import { Chart } from "./chart";
 
 export const SmallBlock = ({ dex }) => {
-  //taglist 만들어서 click시 연결 되도록
-  // smallblock name에 bitblock으로 이어지는 코드 작성 요
+  // 차트 제작
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+
   const [modalOpen, setModalOpen] = useState(false);
   const showModal = () => {
     setModalOpen(true);
@@ -66,9 +69,14 @@ export const SmallBlock = ({ dex }) => {
             </div>
             <div>
               <img src="/assets/images/lion.jpeg" alt="오류" />
+              <div>
+	            <canvas id="myChart"></canvas>
+              </div>
             </div>
           </div>
         </div>
+        
+        
     ) : (
         <div className="card w-[300px] h-[300px] p-1 m-10 items-center justify-center bg-gradient-to-br rounded from-economy_tag/10">
           <div className="smallblock relative flex flex-col bg-white ">
@@ -113,6 +121,7 @@ export const SmallBlock = ({ dex }) => {
             </div>
           </div>
         </div>
+
     );
   }
 };

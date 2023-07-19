@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { DexBlock } from "../components/DexBlock";
 import dexList from "../data/dex";
+import { BigBlock,SmallBlock } from "../components/Block/index";
+import { Tag } from "../components/Block/tag";
+import { Link } from "react-router-dom";
 
 const DexListPage = () => {
-  const [dexes, setPostList] = useState(dexList);
+  //const [dexes, setPostList] = useState(dexList);
 
   const handleChange = (e) => {};
 
@@ -20,19 +23,19 @@ const DexListPage = () => {
                       #
                     </th>
                     <th scope="col" class="px-6 py-4">
-                      First
+                      Title
                     </th>
                     <th scope="col" class="px-6 py-4">
-                      Last
+                      Value
                     </th>
                     <th scope="col" class="px-6 py-4">
-                      Handle
+                      Tags
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                    <td class="whitespace-nowrap px-6 py-4 font-medium">1</td>
+                  {/* <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                    <td class="whitespace-nowrap px-6 py-4 font-medium">1</td> 
                     <td class="whitespace-nowrap px-6 py-4">Mark</td>
                     <td class="whitespace-nowrap px-6 py-4">Otto</td>
                     <td class="whitespace-nowrap px-6 py-4">@mdo</td>
@@ -48,7 +51,10 @@ const DexListPage = () => {
                     <td class="whitespace-nowrap px-6 py-4">Larry</td>
                     <td class="whitespace-nowrap px-6 py-4">Wild</td>
                     <td class="whitespace-nowrap px-6 py-4">@twitter</td>
-                  </tr>
+                  </tr> */}
+                  {dexList.map((dex)=>(
+                    <DexInfo dex={dex} />
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -60,3 +66,25 @@ const DexListPage = () => {
 };
 
 export default DexListPage;
+
+const DexInfo = ({dex}) =>{
+// 순서  1. id, 2. title, 3. closing, 4. tags
+// 3번째 td에 5000을 추후 dex.closing으로 수정
+return (<>
+  <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+  <td class="whitespace-nowrap px-6 py-4 font-medium">{dex.id}</td> 
+  <td class="whitespace-nowrap px-6 py-4">                  
+    <Link
+      to={"/Bigblock/" + dex.id}
+      state={{ istag: false }}>
+      {dex.title}
+    </Link>
+  </td>
+  <td class="whitespace-nowrap px-6 py-4">5000</td>
+  <td class="whitespace-nowrap px-6 py-4 flex flex-row">
+    {dex.tags.map((id)=>(
+    <Tag id={id} dexid={dex.id}/>
+  ))}
+  </td>
+</tr></>
+);};
