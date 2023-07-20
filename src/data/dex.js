@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { getDexes, pullDexes } from "../apis/api";
+import { useEffect, useState } from "react";
+import { getDexes, pullDexHistory, pullDexes } from "../apis/api";
+import { instance, instanceWithToken } from "../apis/axios";
 
 // 캐싱된 dexList 변수
 let cachedDexList = [];
@@ -9,16 +10,25 @@ const useDexList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const response = await instance.get("/dexmanager/userdex/");
+      const response_id = await instance.get("/dexmanager/");
+      const keys = Object.keys(response_id.data);
+      const idArray = keys.map((key) => response_id.data[key].id);
+      if (response.data.is_empty) {
+        await pullDexes();
+        for (let i = 0; i < idArray.length; i++) {
+          pullDexHistory(idArray[i]);
+        }
+      }
       try {
         // Check if cachedDexList is empty, if yes, fetch from backend and cache the result
         if (cachedDexList.length === 0) {
-          await pullDexes();
           const dexes = await getDexes();
           cachedDexList = dexes;
           setDexList(cachedDexList);
         }
       } catch (error) {
-        console.error('Error fetching dex data:', error);
+        console.error("Error fetching dex data:", error);
       }
     };
 
@@ -30,18 +40,9 @@ const useDexList = () => {
 
 export default useDexList;
 
-
-
-
-
-
-
-
-
 // import { useEffect, useState } from 'react';
 // import { getDexes, pullDexes, getUser } from "../apis/api";
 // import { getCookie } from "../utils/cookie";
-
 
 // // 캐싱된 dexList 변수
 // let cachedDexList = [];
@@ -56,7 +57,7 @@ export default useDexList;
 //     const user = getCookie("access_token") ? true : false;
 //     setIsUser(user);
 //   }, []);
-  
+
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       try {

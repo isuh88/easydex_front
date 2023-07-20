@@ -88,23 +88,14 @@ export const logOut = async (token) => {
 export const getDexes = async () => {
   const response = await instance.get("/dexmanager/");
   //Tags are converted from JSON to Array Here
-  response.data.map(
-    function(data) {      
-      const jsonTags = data.tags;
-      const sortedKeys = Object.keys(jsonTags).sort((a, b) => jsonTags[a] - jsonTags[b]);
-      const tagKeys = sortedKeys.map(Number);
-      data.tags = tagKeys;
-    });
-
-  //Used this code for Automatically pullDexHistory while getDexes
-  //But it's computationally expensive, thus I commented out
-  const keys = Object.keys(response.data);
-  const idArray = keys.map(key => response.data[key].id);
-  
-  for (let i = 0; i < idArray.length; i++) {
-    pullDexHistory(idArray[i]);
-  }
-  
+  response.data.map(function (data) {
+    const jsonTags = data.tags;
+    const sortedKeys = Object.keys(jsonTags).sort(
+      (a, b) => jsonTags[a] - jsonTags[b]
+    );
+    const tagKeys = sortedKeys.map(Number);
+    data.tags = tagKeys;
+  });
   return response.data;
 };
 
@@ -133,7 +124,9 @@ export const pullDexHistory = async (id) => {
 };
 
 export const watchDex = async (dexId) => {
-  const response = await instanceWithToken.post(`/dexmanager/${dexId}/userdex/`);
+  const response = await instanceWithToken.post(
+    `/dexmanager/${dexId}/userdex/`
+  );
   if (response.status === 200 || response.status === 201) {
     // console.log(response);
     // window.location.reload();
