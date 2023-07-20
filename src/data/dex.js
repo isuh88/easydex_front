@@ -1,84 +1,92 @@
-const dexList = [
-  {
-    id: 1,
-    invest : false,
-    title: "interest",
-    values: {
-      1 : 0.056,
-      2 : 0.135,
-    },    
-    time : "2023-02-04T07:42:50.658501Z",
-    description : "short description",
-    tags : [1,2,3,4,5],
-  },
-  {
-    id: 2,
-    invest : true,
-    title: "kospi",
-    values: {
-      1 : 1400,
-      2 : 2000,
-      3 : 2100,
-    },
-    time : "2023-02-04T07:42:50.658501Z",
-    description : "short description",
-    tags : [1,2],
+import { useEffect, useState } from 'react';
+import { getDexes, pullDexes } from "../apis/api";
 
-  },
-  {
-    id: 3,
-    invest : true,
-    title: "kospi3",
-    values: {
-      1 : 1400,
-      2 : 2000,
-      3 : 2100,
-    },
-    time : "2023-02-04T07:42:50.658501Z",
-    description : "short description",
-    tags : [1,2],
+// 캐싱된 dexList 변수
+let cachedDexList = [];
 
-  },
-  {
-    id: 4,
-    invest : true,
-    title: "kospi4",
-    values: {
-      1 : 1400,
-      2 : 2000,
-      3 : 2100,
-    },
-    time : "2023-02-04T07:42:50.658501Z",
-    description : "short description",
-    tags : [1,2,5],
+const useDexList = () => {
+  const [dexList, setDexList] = useState(cachedDexList);
 
-  },  {
-    id: 5,
-    invest : true,
-    title: "kospi5",
-    values: {
-      1 : 1400,
-      2 : 2000,
-      3 : 2100,
-    },
-    time : "2023-02-04T07:42:50.658501Z",
-    description : "short description",
-    tags : [1,2,3],
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Check if cachedDexList is empty, if yes, fetch from backend and cache the result
+        if (cachedDexList.length === 0) {
+          await pullDexes();
+          const dexes = await getDexes();
+          cachedDexList = dexes;
+          setDexList(cachedDexList);
+        }
+      } catch (error) {
+        console.error('Error fetching dex data:', error);
+      }
+    };
 
-  },  {
-    id: 2,
-    invest : true,
-    title: "kospi",
-    values: {
-      1 : 1400,
-      2 : 2000,
-      3 : 2100,
-    },
-    time : "2023-02-04T07:42:50.658501Z",
-    description : "short description",
-    tags : [1,2],
+    fetchData();
+  }, []);
 
-  },
-];
+  return dexList;
+};
 
-export default dexList;
+export default useDexList;
+
+
+
+
+
+
+
+
+
+// import { useEffect, useState } from 'react';
+// import { getDexes, pullDexes, getUser } from "../apis/api";
+// import { getCookie } from "../utils/cookie";
+
+
+// // 캐싱된 dexList 변수
+// let cachedDexList = [];
+// let cachedWatchDexList = []; // New cachedWatchDexList to store watchDex data
+
+// const useDexList = () => {
+//   const [dexList, setDexList] = useState(cachedDexList);
+//   const [watchDexList, setWatchDexList] = useState(cachedWatchDexList); // State for watchDexList
+//   const [isUser, setIsUser] = useState("");
+
+//   useEffect(() => {
+//     const user = getCookie("access_token") ? true : false;
+//     setIsUser(user);
+//   }, []);
+  
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         // Check if cachedDexList is empty, if yes, fetch from backend and cache the result
+//         if (cachedDexList.length === 0) {
+//           await pullDexes();
+//           const dexes = await getDexes();
+//           cachedDexList = dexes;
+//           setDexList(cachedDexList);
+//         }
+
+//         // Fetch watchDex data and cache it
+//         // Assuming `isUser` is a boolean representing if a user is logged in
+//         if (isUser && cachedWatchDexList.length === 0) {
+//           const user = await getUser();
+//           const watchingDex = dexList.filter(
+//             (dex) => dex.watching_users.includes(user.id) > 0
+//           );
+//           cachedWatchDexList = watchingDex;
+//           setWatchDexList(cachedWatchDexList);
+//         }
+//       } catch (error) {
+//         console.error('Error fetching dex data:', error);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   return { dexList, watchDexList }; // Return both dexList and watchDexList
+// };
+
+// export default useDexList;
