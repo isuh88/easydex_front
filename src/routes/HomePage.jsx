@@ -35,7 +35,7 @@ const HomePage = () => {
   //       setWatchingDex(watchingDex);
   //       );
   //       // console.log(watchingDex);
-  //    
+  //
   //     }
   //   };
   //   getDexesAPI();
@@ -45,8 +45,7 @@ const HomePage = () => {
   const handleCustom = () => {
     customDex ? setCustomDex(false) : setCustomDex(true);
   };
-  useEffect(()=> {
-  },[customDex]);
+  useEffect(() => {}, [customDex]);
 
   const handleChange = (e) => {};
   //className="grid grid-cols-4 px-10 mt-10"
@@ -58,12 +57,27 @@ const HomePage = () => {
             <img src={EasyDEXlogo} className="mainPageLogo" />
           </Link>
         </div>
-        <div className="form-control">
-          <input
-            type="text"
-            placeholder="관심 있는 키워드를 검색해보세요!"
-            className="main-input input-bordered "
-          />
+
+        <div className="join">
+          <div>
+            <div className="form-control">
+              <input
+                className="input main-input input-bordered join-item"
+                placeholder="관심 있는 키워드를 입력하세요!"
+              />
+            </div>
+          </div>
+          <select className="select select-bordered join-item">
+            <option disabled selected>
+              Category
+            </option>
+            <option>Sci-fi</option>
+            <option>Drama</option>
+            <option>Action</option>
+          </select>
+          <div className="indicator">
+            <button className="btn join-item">Search</button>
+          </div>
         </div>
         <div>
           <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
@@ -79,10 +93,8 @@ const HomePage = () => {
 
 export default HomePage;
 
-
 // // 이 아래는 사용자 custon dexlist를 위해서 따로 분류해서 작성중
 // 그대로 둘 것
-
 
 //   isUser ?(
 //   <div>
