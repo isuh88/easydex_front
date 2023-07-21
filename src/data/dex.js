@@ -108,7 +108,7 @@
 
 // import { useEffect, useState } from 'react';
 // import { getDexes, pullDexes, getUser } from '../apis/api';
-// import { getCookie, setLocalStorage, getLocalStorage } from '../utils/cookie';
+// import { getCookie, setSessionStorage, getSessionStorage } from '../utils/cookie';
 
 // const useDexList = () => {
 //   const [cachedDexList, setCachedDexList] = useState([]);
@@ -124,7 +124,7 @@
 //     const fetchData = async () => {
 //       try {
 //         // 최초 접속 시에는 localStorage에서 dexList를 불러옵니다.
-//         const cachedDexes = getLocalStorage('cachedDexList');
+//         const cachedDexes = getSessionStorage('cachedDexList');
 //         if (cachedDexes) {
 //           setCachedDexList(cachedDexes);
 //         } else {
@@ -132,7 +132,7 @@
 //           const dexes = await getDexes();
 //           setCachedDexList(dexes);
 //           // 최초로 받아온 dexList를 localStorage에 저장합니다.
-//           setLocalStorage('cachedDexList', dexes);
+//           setSessionStorage('cachedDexList', dexes);
 //         }
 //       } catch (error) {
 //         console.error('지표 데이터를 가져오는 도중 오류가 발생했습니다:', error);
@@ -165,7 +165,7 @@
 
 import { useEffect, useState } from 'react';
 import { getDexes, pullDexes, getUser } from '../apis/api';
-import { getCookie, setLocalStorage, getLocalStorage } from '../utils/cookie';
+import { getCookie, setSessionStorage, getSessionStorage } from '../utils/cookie';
 
 const useDexList = () => {
   const [cachedDexList, setCachedDexList] = useState([]);
@@ -179,7 +179,7 @@ const useDexList = () => {
         setIsUser(user);
 
         // 최초 접속 시에는 localStorage에서 dexList를 불러옵니다.
-        const cachedDexes = getLocalStorage('cachedDexList');
+        const cachedDexes = getSessionStorage('cachedDexList');
 
         if (cachedDexes) {
           setCachedDexList(cachedDexes);
@@ -188,13 +188,14 @@ const useDexList = () => {
           const dexes = await getDexes();
           setCachedDexList(dexes);
           // 최초로 받아온 dexList를 localStorage에 저장합니다.
-          setLocalStorage('cachedDexList', dexes);
+          setSessionStorage('cachedDexList', dexes);
         }
 
-        if (user && cachedDexList.length > 0) {
+        if (isUser) {
           const watchingDex = cachedDexList.filter((dex) => dex.watching_users.includes(user.id) > 0);
           setCachedWatchDexList(watchingDex);
         }
+        // setSessionStorage('cachedWatchingDexList', cachedWatchDexList)
 
         // console.log(cachedDexList);
 

@@ -136,7 +136,7 @@ export const watchDex = async (dexId) => {
   const response = await instanceWithToken.post(`/dexmanager/${dexId}/userdex/`);
   if (response.status === 200 || response.status === 201) {
     // console.log(response);
-    // window.location.reload();
+    window.location.reload();
   } else {
     console.log("[ERROR] error while deleting post");
   }

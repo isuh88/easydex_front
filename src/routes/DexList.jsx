@@ -4,12 +4,12 @@ import useDexList from "../data/dex";
 import { BigBlock,SmallBlock } from "../components/Block/index";
 import { Tag } from "../components/Block/tag";
 import { Link } from "react-router-dom";
-import { getLocalStorage } from "../utils/cookie";
+import { getSessionStorage } from "../utils/cookie";
 
 const DexListPage = () => {
   // const dexList = useDexList();
   // const { dexList, watchDexList } = useDexList();
-  const dexList = getLocalStorage('cachedDexList');
+  const dexList = getSessionStorage('cachedDexList');
   console.log(`DexList is ${dexList}`);
 
   const handleChange = (e) => {};

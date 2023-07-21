@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { BigBlock, SmallBlock } from "../components/Block";
 import { getDexes, pullDexes, getUser } from "../apis/api";
-import { getCookie } from "../utils/cookie";
+import { getCookie, getSessionStorage, setSessionStorage } from "../utils/cookie";
 import EasyDEXlogo from "../assets/images/EasyDEX_logo.png";
 
 const HomePage = () => {
@@ -22,7 +22,8 @@ const HomePage = () => {
   }, []);
 
   // //여기서 dexList, watchDexList를 컨트롤중임... 로직 수정 필요
-  // const [watchDex, setWatchList] = useState([]);
+  // const [watchDex, setWatchList] = useState(getSessionStorage('cachedWatchingDexList'));
+  // console.log(watchDex);
   // useEffect(() => {
   //   const watchDexAPI = async () => {
   //     //watchDex: dexes being practically rendered on the Home(Custom)Page
@@ -33,11 +34,12 @@ const HomePage = () => {
   //         (dex) => dex.watching_users.includes(user.id) > 0
   //       );
   //       setWatchList(watchingDex);
-  //       console.log(watchDex);
+  //       setSessionStorage('cachedWatchingDexList', watchDex);
   //     }
   //   };
   //   watchDexAPI();
-  // }, [watchDex]);
+  // }, []);
+  // console.log(watchDex);
 
   const handleChange = (e) => {};
   //className="grid grid-cols-4 px-10 mt-10"

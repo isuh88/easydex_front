@@ -7,7 +7,6 @@ import { watchDex, getDexes, getDexesAPI, pullDexes } from "../../apis/api";
 
 export const SmallBlock = ({ dex }) => {
   const onClickWatch = () => {
-    console.log(dex.id);
     watchDex(dex.id);
   };
 

@@ -4,13 +4,13 @@ import { DexBlock } from "../components/DexBlock";
 import { getDexes, pullDexes, getUser } from "../apis/api";
 import { BigBlock,SmallBlock } from "../components/Block";
 import { useLocation, useParams } from "react-router-dom";
-import { getLocalStorage } from "../utils/cookie";
+import { getSessionStorage } from "../utils/cookie";
 
 const BigBlockPage = () => {
 
   //Component화 희망
   // const dexList = useDexList();
-  const dexList = getLocalStorage('cachedDexList');
+  const dexList = getSessionStorage('cachedDexList');
   console.log(dexList);
   // const { dexList, watchDexList } = useDexList();
   // console.log(dexList);
