@@ -7,7 +7,6 @@ import { watchDex, getDexes, getDexesAPI, pullDexes } from "../../apis/api";
 
 export const SmallBlock = ({ dex }) => {
   const onClickWatch = () => {
-    console.log(dex.id);
     watchDex(dex.id);
   };
 
@@ -134,7 +133,7 @@ export const BigBlock = ({ dex }, index) => {
   // index와 dex id가 같으면 이전과의 관계 필요 x
 
   // 이부분에 dexlist 가져오고 dex또한 필요
-  const dexList = useDexList();
+  const {dexList, watchDexList} = useDexList();
 
   const [modalOpen, setModalOpen] = useState(false);
   const showModal = () => {
