@@ -4,9 +4,13 @@ import useDexList from "../data/dex";
 import { BigBlock,SmallBlock } from "../components/Block/index";
 import { Tag } from "../components/Block/tag";
 import { Link } from "react-router-dom";
+import { getLocalStorage } from "../utils/cookie";
 
 const DexListPage = () => {
-  const [dexes, setPostList] = useState(useDexList());
+  // const dexList = useDexList();
+  // const { dexList, watchDexList } = useDexList();
+  const dexList = getLocalStorage('cachedDexList');
+  console.log(`DexList is ${dexList}`);
 
   const handleChange = (e) => {};
 
@@ -52,7 +56,7 @@ const DexListPage = () => {
                     <td class="whitespace-nowrap px-6 py-4">Wild</td>
                     <td class="whitespace-nowrap px-6 py-4">@twitter</td>
                   </tr> */}
-                  {dexes.map((dex)=>(
+                  {dexList.map((dex)=>(
                     <DexInfo dex={dex} />
                   ))}
                 </tbody>

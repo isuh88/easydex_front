@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 export const Tag = ({ id }, { dexid }) => {
 
-  const dexList = useDexList();
+  const {dexList, watchDexList} = useDexList();
+
   const tagid = id;
   const dex = dexList[id];
   return (

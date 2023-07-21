@@ -19,3 +19,25 @@ export const getCookie = ( name ) => {
 export const removeCookie = ( name ) => {
     cookies.remove(name)
 }
+
+export const setLocalStorage = (key, value) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error('localStorage 저장 중 오류가 발생했습니다:', error);
+  }
+};
+
+// localStorage에서 데이터를 불러옵니다.
+export const getLocalStorage = (key) => {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  } catch (error) {
+    console.error('localStorage 불러오기 중 오류가 발생했습니다:', error);
+    return null;
+  }
+};
+
+
+
