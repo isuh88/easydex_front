@@ -31,7 +31,7 @@ export const Tag = ({ id }, { dexid }) => {
 
   return (
     dex && (
-      <div className="badge badge-outline m-2 uppercase">
+      <div className="btn btn-xs btn-outline m-2 uppercase">
         <Link to={"/Bigblock/" + tagid} state={{ istag: true }}>
           {dex.title}
         </Link>

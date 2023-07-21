@@ -57,7 +57,6 @@ export const SignUpForm = ({ formData, setFormData, handleSignUpSubmit }) => {
         value={formData.username}
       />
 
-
       <button type="submit" className="button mt-7">
         Sign up !
       </button>
@@ -73,31 +72,37 @@ export const SignInForm = ({ formData, setFormData, handleSignInSubmit }) => {
 
   return (
     <form className="form" onSubmit={handleSignInSubmit}>
-      <label htmlFor="username" className="label">
-        *username:
-      </label>
-      <input
-        required
-        type="text"
-        id="username"
-        className="input"
-        onChange={handleFormData}
-        value={formData.username}
-      />
-      <label htmlFor="password" className="label">
-        *password:
-      </label>
-      <input
-        required
-        type="password"
-        id="password"
-        className="input"
-        onChange={handleFormData}
-        value={formData.password}
-      />
-      <button type="submit" className="button mt-7">
-        Sign in !
-      </button>
+      <div className="flex items-center justify-between card h-[400px] w-[500px] bg-base-100 shadow-xl m-[30px] p-[30px]">
+        <div className="w-[440px]">
+          <p className="font-bold font-sans text-4xl">로그인하세요</p>
+          <p className="font-bold font-sans text-xl">
+            경제 관련 소식을 받아보세요.
+          </p>
+        </div>
+
+        <input
+          required
+          type="text"
+          id="username"
+          className="input input-bordered w-full"
+          onChange={handleFormData}
+          value={formData.username}
+          placeholder="이메일 또는 전화"
+        />
+
+        <input
+          required
+          type="password"
+          id="password"
+          className="input input-bordered w-full"
+          onChange={handleFormData}
+          value={formData.password}
+          placeholder="비밀번호"
+        />
+        <button type="submit" className="btn btn-lg btn-wide mt-7 font-sans ">
+          로그인
+        </button>
+      </div>
     </form>
   );
 };
