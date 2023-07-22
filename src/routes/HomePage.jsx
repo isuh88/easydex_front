@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { BigBlock, SmallBlock } from "../components/Block";
 import { getDexes, pullDexes, getUser } from "../apis/api";
-import { getCookie, getSessionStorage, setSessionStorage } from "../utils/cookie";
+import {
+  getCookie,
+  getSessionStorage,
+  setSessionStorage,
+} from "../utils/cookie";
 import EasyDEXlogo from "../assets/images/EasyDEX_logo.png";
 
 const HomePage = () => {
-  
   //백엔드에 저장되는 데이터로 수정
   // const dexList = useDexList();
   const { dexList, watchDexList } = useDexList();
@@ -49,7 +52,6 @@ const HomePage = () => {
   };
   useEffect(() => {}, [customDex]);
 
-
   const handleChange = (e) => {};
   //className="grid grid-cols-4 px-10 mt-10"
 
@@ -85,7 +87,7 @@ const HomePage = () => {
         </div>
         <div>
           <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-            {dexes.map((dex) => (
+            {dexList.map((dex) => (
               <SmallBlock dex={dex} />
             ))}
           </div>{" "}
