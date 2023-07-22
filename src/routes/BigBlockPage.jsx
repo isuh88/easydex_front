@@ -11,10 +11,9 @@ const BigBlockPage = () => {
   //Component화 희망
   // const dexList = useDexList();
   const dexList = getSessionStorage('cachedDexList');
-  console.log(dexList);
   // const { dexList, watchDexList } = useDexList();
   // console.log(dexList);
-  console.log(`BigBlock is ${dexList}`);
+  // console.log(`BigBlock is ${dexList}`);
 
   const {blockid} = useParams();
   const dex = dexList.find((dexItem) => dexItem.id == blockid);

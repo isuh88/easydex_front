@@ -4,11 +4,9 @@ import { Tag } from "./tag";
 import { useState, useEffect } from "react";
 import ModalBasic from "./modalBasic";
 import { watchDex, getDexes, getDexesAPI, pullDexes } from "../../apis/api";
+import { getSessionStorage } from "../../utils/cookie";
 
 export const SmallBlock = ({ dex }) => {
-  const onClickWatch = () => {
-    watchDex(dex.id);
-  };
 
   //taglist 만들어서 click시 연결 되도록
   // smallblock name에 bitblock으로 이어지는 코드 작성 요
@@ -20,13 +18,18 @@ export const SmallBlock = ({ dex }) => {
   function getRandom(length) {
     return Math.floor(Math.random() * length);
   }
+
   var randomTag = [];
+  console.log("before RandomTag");
   if (dex.tags.length) {
+    //임시조치. 연관도 기준으로 오는 dex.tags와(자기자신 포함하므로 유의),
+    //dex.tags 제외하고 randomTag로 한 놈만 뽑을 수 있도록!
+    randomTag.push(dex.tags[1]);
     randomTag.push(getRandom(dex.tags.length));
-    randomTag.push(getRandom(dex.tags.length));
-    while (randomTag[0] == randomTag[1]) {
-      randomTag[1] = getRandom(dex.tags.length);
-    }
+    // while (randomTag[0] == randomTag[1]) {
+    //   console.log('infinite loop');
+    //   randomTag[1] = getRandom(dex.tags.length);
+    // }
 
     // console.log(randomTag);
     return dex.invest ? (
@@ -39,9 +42,6 @@ export const SmallBlock = ({ dex }) => {
             >
               🙌
             </div>
-            <button className="btn btn-xs" onClick={onClickWatch}>
-              ❤️
-            </button>
           </div>
           <div className="w-full flex flex-row flex-wrap justify-between">
             <div className="w-1/2 flex flex-col">
@@ -83,9 +83,6 @@ export const SmallBlock = ({ dex }) => {
             >
               🙌
             </div>
-            <button className="btn btn-xs" onClick={onClickWatch}>
-              ❤️
-            </button>
           </div>
           <div className="w-full flex flex-row flex-wrap justify-between">
             <div className="flex flex-col">
@@ -122,6 +119,12 @@ export const SmallBlock = ({ dex }) => {
 };
 
 export const BigBlock = ({ dex }, index) => {
+  // console.log(dex.tags);
+  // if (typeof dex.tags === 'string') {
+  //   const dexTags = Object.keys(JSON.parse(dex.tags.replace(/'/g, '"'))).map(Number);
+  //   dex.tags = dexTags;
+  //   console.log(dex);
+  // }
 
   const onClickWatch = () => {
     console.log(dex.id);
@@ -133,19 +136,20 @@ export const BigBlock = ({ dex }, index) => {
   // index와 dex id가 같으면 이전과의 관계 필요 x
 
   // 이부분에 dexlist 가져오고 dex또한 필요
-  const {dexList, watchDexList} = useDexList();
+  // const {dexList, watchDexList} = useDexList();
+  const dexList = getSessionStorage("cachedDexList");
 
   const [modalOpen, setModalOpen] = useState(false);
   const showModal = () => {
     setModalOpen(true);
   };
 
-  // console.log(dex.tags);
   var tagDexarr = [];
+  // console.log(dex);
   dex.tags.map((id) => {
     // tagDexarr.push(dexList.find((dex) => dex.id === id));
-    tagDexarr.push(dexList.find((dex) => dex.id === id+60));
-
+    // console.log(id);
+    tagDexarr.push(dexList.find((dex) => dex.id === id));
   });
 
   // 추후 tag인지 smallblcok에서 왔는지 구분할때 필요
@@ -163,10 +167,7 @@ export const BigBlock = ({ dex }, index) => {
               >
                 🙌
               </div>
-              <button
-                className="btn btn-xs"
-                onClick={onClickWatch}
-              >
+              <button className="btn btn-xs" onClick={onClickWatch}>
                 ❤️
               </button>
             </div>
@@ -200,10 +201,7 @@ export const BigBlock = ({ dex }, index) => {
               >
                 🙌
               </div>
-              <button
-                className="btn btn-xs"
-                onClick={onClickWatch}
-              >
+              <button className="btn btn-xs" onClick={onClickWatch}>
                 ❤️
               </button>
             </div>

@@ -44,7 +44,6 @@ const HomePage = () => {
   const handleChange = (e) => {};
   //className="grid grid-cols-4 px-10 mt-10"
 
-  
   return (
     <div>
       <div className="mainLayout">

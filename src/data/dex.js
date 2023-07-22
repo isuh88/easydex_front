@@ -186,6 +186,18 @@ const useDexList = () => {
         } else {
           await pullDexes();
           const dexes = await getDexes();
+          dexes.map(function(dex) {
+            console.log(dex.tags);
+            if (typeof dex.tags === 'string') {
+              console.log(dex.tags);
+              const jsonTags = JSON.parse(dex.tags.replace(/'/g, '"'));
+              const dexTags = Object.keys(jsonTags)
+                                      .sort((a, b) => jsonTags[b] - jsonTags[a])
+                                      .map(Number);
+              dex.tags = dexTags;        
+            }
+          });
+
           setCachedDexList(dexes);
           // 최초로 받아온 dexList를 localStorage에 저장합니다.
           setSessionStorage('cachedDexList', dexes);
