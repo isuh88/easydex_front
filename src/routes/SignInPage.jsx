@@ -14,13 +14,19 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-1/2">
-      <h3 className=" font-bold text-4xl">Sign In</h3>
+    <div className="flex flex-col items-center my-[100px]">
+      <h3 className="font-bold text-4xl font-sans uppercase">
+        Easy Sign In<br></br>
+      </h3>
       <SignInForm
         formData={formData}
         setFormData={setFormData}
         handleSignInSubmit={handleSignInSubmit}
       />
+      <div className="flex flex-row items-center">
+        <p className="font-sans">EasyDEX가 처음이세요?</p>
+        <p className="font-sans btn btn-link"> 가입하기</p>
+      </div>
     </div>
   );
 };

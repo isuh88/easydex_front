@@ -11,10 +11,9 @@ const BigBlockPage = () => {
   //Component화 희망
   // const dexList = useDexList();
   const dexList = getSessionStorage('cachedDexList');
-  console.log(dexList);
   // const { dexList, watchDexList } = useDexList();
   // console.log(dexList);
-  console.log(`BigBlock is ${dexList}`);
+  // console.log(`BigBlock is ${dexList}`);
 
   const {blockid} = useParams();
   const dex = dexList.find((dexItem) => dexItem.id == blockid);
@@ -23,13 +22,13 @@ const BigBlockPage = () => {
   const istag = location.state.istag;
   {istag ? console.log("태그에서 왔음") : console.log("다른데서 옴")};
 
+
   const handleChange = (e) => {};
   //className="grid grid-cols-4 px-10 mt-10"
   return (
     <div>
-      This is BigblockPage
       <div>
-        <BigBlock dex ={dex}/>
+        <BigBlock dex={dex} />
       </div>
     </div>
   );
