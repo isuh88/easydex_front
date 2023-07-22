@@ -31,34 +31,32 @@ const Header = () => {
             />
           </Link>
         </div>
+        <div>
+          <p className="font-sans ">
+            더 쉬운 경제지표 <br></br>더 현명한 재테크
+          </p>
+          <p className="font-sans ml-5 text-4xl tracking-widest">EasyDEX</p>
+        </div>
 
         <div className="flex-none">
           <div className="flex">
             {!isUser ? (
               <>
-                <Link
-                  to="/signin"
-                  className="btn btn-ghost mr-10 p-3 uppercase"
-                >
+                <Link to="/signin" className="btn btn-ghost p-3 uppercase">
                   sign In
                 </Link>
-                <Link
-                  to="/signup"
-                  className="btn btn-ghost mr-10 p-3 uppercase"
-                >
+                <Link to="/signup" className="btn btn-ghost p-3 uppercase">
+
                   sign up
                 </Link>
               </>
             ) : (
               <>
-                <Link to="/my" className="mr-10 p-3 uppercase">
+                <Link to="/my" className="p-3 uppercase">
                   my page
                 </Link>
-                <Link
-                  to="/"
-                  onClick={handleLogout}
-                  className="mr-10 p-3 uppercase"
-                >
+                <Link to="/" onClick={handleLogout} className="p-3 uppercase">
+
                   log out
                 </Link>
               </>

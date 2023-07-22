@@ -79,9 +79,11 @@ const DexInfo = ({dex}) =>{
 // 순서  1. id, 2. title, 3. closing, 4. tags
 // 3번째 td에 5000을 추후 dex.closing으로 수정
 
+
 const onClickWatch = () => {
   watchDex(dex.id);
 };
+
 
 
 return (<>
@@ -93,9 +95,11 @@ return (<>
       state={{ istag: false }}>
       {dex.title}
     </Link>
+
     <button className="btn btn-xs" onClick={onClickWatch}>
               ❤️
     </button>
+
   </td>
   <td class="whitespace-nowrap px-6 py-4">5000</td>
   <td class="whitespace-nowrap px-6 py-4 flex flex-row">

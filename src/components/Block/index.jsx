@@ -6,10 +6,11 @@ import ModalBasic from "./modalBasic";
 import { watchDex, getDexes, getDexesAPI, pullDexes } from "../../apis/api";
 import { getSessionStorage } from "../../utils/cookie";
 
-export const SmallBlock = ({ dex }) => {
+import { Chart } from "./chart";
 
-  //taglist 만들어서 click시 연결 되도록
-  // smallblock name에 bitblock으로 이어지는 코드 작성 요
+export const SmallBlock = ({ dex }) => {
+  // 차트 제작
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>;
   const [modalOpen, setModalOpen] = useState(false);
   const showModal = () => {
     setModalOpen(true);
@@ -18,6 +19,7 @@ export const SmallBlock = ({ dex }) => {
   function getRandom(length) {
     return Math.floor(Math.random() * length);
   }
+
 
   var randomTag = [];
   console.log("before RandomTag");
@@ -30,7 +32,6 @@ export const SmallBlock = ({ dex }) => {
     //   console.log('infinite loop');
     //   randomTag[1] = getRandom(dex.tags.length);
     // }
-
     // console.log(randomTag);
     return dex.invest ? (
       <div className="card w-[300px] h-[300px]  p-1 m-10  items-center justify-center bg-gradient-to-br rounded">
@@ -70,6 +71,10 @@ export const SmallBlock = ({ dex }) => {
           </div>
           <div>
             <img src="/assets/images/lion.jpeg" alt="오류" />
+            <div>
+              <canvas id="myChart"></canvas>
+            </div>
+
           </div>
         </div>
       </div>
@@ -90,7 +95,7 @@ export const SmallBlock = ({ dex }) => {
                 <Link
                   to={"/Bigblock/" + dex.id}
                   state={{ istag: false }}
-                  className="btn btn-ghost"
+                  className="btn btn-ghost btn-lg"
                 >
                   {dex.title}
                 </Link>
@@ -119,6 +124,7 @@ export const SmallBlock = ({ dex }) => {
 };
 
 export const BigBlock = ({ dex }, index) => {
+
   // console.log(dex.tags);
   // if (typeof dex.tags === 'string') {
   //   const dexTags = Object.keys(JSON.parse(dex.tags.replace(/'/g, '"'))).map(Number);
@@ -138,13 +144,13 @@ export const BigBlock = ({ dex }, index) => {
   // 이부분에 dexlist 가져오고 dex또한 필요
   // const {dexList, watchDexList} = useDexList();
   const dexList = getSessionStorage("cachedDexList");
-
   const [modalOpen, setModalOpen] = useState(false);
   const showModal = () => {
     setModalOpen(true);
   };
 
   var tagDexarr = [];
+
   // console.log(dex);
   dex.tags.map((id) => {
     // tagDexarr.push(dexList.find((dex) => dex.id === id));
@@ -156,11 +162,12 @@ export const BigBlock = ({ dex }, index) => {
   const fromhome = dex.id == index ? true : false;
 
   return (
-    <div className="flex flex-col">
+    <div className="mainLayout">
       {dex.invest ? (
-        <div className="self-center w-[755px] h-[460px] p-1 items-center justify-center bg-gradient-to-br rounded">
+        <div className="self-center p-1 my-10 items-center justify-center bg-gradient-to-br rounded">
           <div className="bigblock relative flex flex-col bg-white">
-            <div className="px-2 py-1 flex justify-between">
+            <div className="py-1 flex justify-between">
+
               <div
                 className="tooltip"
                 data-tip="흰색 block은 투자지표이고 갈색 block은 경제지표입니다"
@@ -184,15 +191,23 @@ export const BigBlock = ({ dex }, index) => {
                   <Tag id={id} dexid={dex.id} />
                 ))}
               </div>
+
             </div>
-            <div className="flex flex-col">
-              <p>{dex.closing}</p>
+            <div className="flex flex-row justify-between py-3">
+              <div className="flex flex-col">
+                <p>{dex.closing}</p>
+                <div className="h-[300px]">
+                  <p>graph</p>
+                </div>
+              </div>
+              <div className="divider divider-horizontal"></div>
+              <div>{dex.description}</div>
             </div>
-            <div>{dex.description}</div>
           </div>
         </div>
       ) : (
-        <div className="self-center w-[755px] h-[460px] p-1 items-center justify-center bg-gradient-to-br rounded from-economy_tag/80">
+        <div className="self-center p-1 my-10 items-center justify-center bg-gradient-to-br rounded from-economy_tag/80">
+
           <div className="bigblock relative flex flex-col bg-white">
             <div className=" flex justify-between">
               <div
@@ -210,6 +225,7 @@ export const BigBlock = ({ dex }, index) => {
                 to={"/Bigblock/" + dex.id}
                 state={{ istag: false }}
                 className="btn btn-ghost"
+
               >
                 {dex.title}
               </Link>
@@ -219,12 +235,21 @@ export const BigBlock = ({ dex }, index) => {
                 ))}
               </div>
             </div>
-            <div className="flex flex-row">{dex.closing}</div>
-            <div>{dex.description}</div>
+            <div className="flex flex-row justify-between py-3">
+              <div className="flex flex-col">
+                <p>{dex.closing}</p>
+                <div className="h-[300px]">
+                  <p>graph</p>
+                </div>
+              </div>
+              <div className="divider divider-horizontal"></div>
+              <div>{dex.description}</div>
+            </div>
           </div>
         </div>
       )}
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+
         {tagDexarr.map((dex) => (
           <SmallBlock dex={dex} />
         ))}
