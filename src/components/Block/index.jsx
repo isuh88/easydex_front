@@ -19,7 +19,6 @@ export const SmallBlock = ({ dex }) => {
     return Math.floor(Math.random() * length);
   }
 
-
   var randomTag = [];
   console.log("before RandomTag");
   if (dex.tags.length) {
@@ -73,7 +72,6 @@ export const SmallBlock = ({ dex }) => {
             <div>
               <canvas id="myChart"></canvas>
             </div>
-
           </div>
         </div>
       </div>
@@ -123,7 +121,6 @@ export const SmallBlock = ({ dex }) => {
 };
 
 export const BigBlock = ({ dex }, index) => {
-
   // console.log(dex.tags);
   // if (typeof dex.tags === 'string') {
   //   const dexTags = Object.keys(JSON.parse(dex.tags.replace(/'/g, '"'))).map(Number);
@@ -166,7 +163,6 @@ export const BigBlock = ({ dex }, index) => {
         <div className="self-center p-1 my-10 items-center justify-center bg-gradient-to-br rounded">
           <div className="bigblock relative flex flex-col bg-white">
             <div className="py-1 flex justify-between">
-
               <div
                 className="tooltip"
                 data-tip="흰색 block은 투자지표이고 갈색 block은 경제지표입니다"
@@ -177,11 +173,11 @@ export const BigBlock = ({ dex }, index) => {
                 ❤️
               </button>
             </div>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-col justify-between ">
               <Link
                 to={"/Bigblock/" + dex.id}
                 state={{ istag: false }}
-                className="text-5xl px-2 py-4 font-sans uppercase"
+                className="text-4sxl px-2 py-2 font-sans uppercase"
               >
                 {dex.title}
               </Link>
@@ -190,7 +186,6 @@ export const BigBlock = ({ dex }, index) => {
                   <Tag id={id} dexid={dex.id} />
                 ))}
               </div>
-
             </div>
             <div className="flex flex-row justify-between py-3">
               <div className="flex flex-row">
@@ -206,7 +201,6 @@ export const BigBlock = ({ dex }, index) => {
         </div>
       ) : (
         <div className="self-center p-1 my-10 items-center justify-center bg-gradient-to-br rounded from-economy_tag/80">
-
           <div className="bigblock relative flex flex-col bg-white">
             <div className=" flex justify-between">
               <div
@@ -219,12 +213,11 @@ export const BigBlock = ({ dex }, index) => {
                 ❤️
               </button>
             </div>
-            <div className="flex flex-row justify-between p-5">
+            <div className="flex flex-col justify-between">
               <Link
                 to={"/Bigblock/" + dex.id}
                 state={{ istag: false }}
-                className="text-5xl px-2 py-4 font-sans uppercase"
-
+                className="text-4xl px-2 py-2 font-sans uppercase"
               >
                 {dex.title}
               </Link>
@@ -248,7 +241,6 @@ export const BigBlock = ({ dex }, index) => {
         </div>
       )}
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-
         {tagDexarr.map((dex) => (
           <SmallBlock dex={dex} />
         ))}

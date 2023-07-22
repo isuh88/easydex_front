@@ -23,8 +23,7 @@
 }
 
 .bigblock {
-  @apply w-[750px] h-[550px] rounded-[5px] p-10 shadow-xl;
-
+  @apply w-[750px] h-[550px] rounded-[5px] px-10 py-8 shadow-xl;
 }
 
 body {
