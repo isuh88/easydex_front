@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import ModalBasic from "./modalBasic";
 import { watchDex, getDexes, getDexesAPI, pullDexes } from "../../apis/api";
 import { getSessionStorage } from "../../utils/cookie";
-
 import { Chart } from "./chart";
 
 export const SmallBlock = ({ dex }) => {
@@ -174,19 +173,19 @@ export const BigBlock = ({ dex }, index) => {
               >
                 🙌
               </div>
-              <button className="btn btn-xs" onClick={onClickWatch}>
+              <button className="btn btn-xs btn-ghost" onClick={onClickWatch}>
                 ❤️
               </button>
             </div>
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-row justify-between">
               <Link
                 to={"/Bigblock/" + dex.id}
                 state={{ istag: false }}
-                className="btn btn-ghost"
+                className="text-5xl px-2 py-4 font-sans uppercase"
               >
                 {dex.title}
               </Link>
-              <div className="flex flex-col">
+              <div className="flex flex-row">
                 {dex.tags.map((id) => (
                   <Tag id={id} dexid={dex.id} />
                 ))}
@@ -194,7 +193,7 @@ export const BigBlock = ({ dex }, index) => {
 
             </div>
             <div className="flex flex-row justify-between py-3">
-              <div className="flex flex-col">
+              <div className="flex flex-row">
                 <p>{dex.closing}</p>
                 <div className="h-[300px]">
                   <p>graph</p>
@@ -216,15 +215,15 @@ export const BigBlock = ({ dex }, index) => {
               >
                 🙌
               </div>
-              <button className="btn btn-xs" onClick={onClickWatch}>
+              <button className="btn btn-xs btn-ghost" onClick={onClickWatch}>
                 ❤️
               </button>
             </div>
-            <div className="flex flex-rcol justify-between p-5">
+            <div className="flex flex-row justify-between p-5">
               <Link
                 to={"/Bigblock/" + dex.id}
                 state={{ istag: false }}
-                className="btn btn-ghost"
+                className="text-5xl px-2 py-4 font-sans uppercase"
 
               >
                 {dex.title}
