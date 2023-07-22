@@ -173,11 +173,11 @@ export const BigBlock = ({ dex }, index) => {
                 ❤️
               </button>
             </div>
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col justify-between ">
               <Link
                 to={"/Bigblock/" + dex.id}
                 state={{ istag: false }}
-                className="text-5xl px-2 py-4 font-sans uppercase"
+                className="text-4sxl px-2 py-2 font-sans uppercase"
               >
                 {dex.title}
               </Link>
@@ -213,11 +213,11 @@ export const BigBlock = ({ dex }, index) => {
                 ❤️
               </button>
             </div>
-            <div className="flex flex-col justify-between p-5">
+            <div className="flex flex-col justify-between">
               <Link
                 to={"/Bigblock/" + dex.id}
                 state={{ istag: false }}
-                className="text-5xl px-2 py-4 font-sans uppercase"
+                className="text-4xl px-2 py-2 font-sans uppercase"
               >
                 {dex.title}
               </Link>
