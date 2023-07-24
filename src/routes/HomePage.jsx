@@ -16,10 +16,23 @@ const HomePage = () => {
   //백엔드에 저장되는 데이터로 수정
   // const dexList = useDexList();
   const { dexList, watchDexList } = useDexList();
+  //dummy watchinDex
+  const watchingDex = [dexList[1],dexList[2],dexList[3],dexList[4],dexList[5]];
 
   //로그인 여부를 판정하기 위해 사용
+  const [customDex, setCustomDex] = useState(false);
+  const handleCustom = () => {
+    customDex ? setCustomDex(false) : setCustomDex(true);
+  };
   const [isUser, setIsUser] = useState("");
-  const [watchingDex, setWatchingDex] = useState([]);
+  const handleDummyisUser = ()=>{
+    isUser ? setIsUser(false) : setIsUser(true);
+    if(isUser){
+      setCustomDex(false);
+    }
+  }
+  // const [watchingDex, setWatchingDex] = useState([]);
+  
   // useEffect(() => {
   //   const user = getCookie("access_token") ? true : false;
   //   setIsUser(user);
@@ -46,55 +59,99 @@ const HomePage = () => {
   //     if (isUser) {
   //       const user = await getUser();
 
-  const [customDex, setCustomDex] = useState(false);
-  const handleCustom = () => {
-    customDex ? setCustomDex(false) : setCustomDex(true);
-  };
+
   useEffect(() => {}, [customDex]);
 
-  const handleChange = (e) => {};
-  //className="grid grid-cols-4 px-10 mt-10"
-
-  return (
+  return (  isUser ?(
     <div>
-      <div className="mainLayout">
+    <div className="mainLayout">
+      <div>
+        <Link to="/">
+          <img src={EasyDEXlogo} className="mainPageLogo" />
+        </Link>
+      </div>
+      <div className="flex flex-col justify-center">
+    <div> <button onClick={() => handleDummyisUser()}>Dummy User Login Check button</button></div>
+    <div><button onClick={() =>handleCustom()}>User custom dexes button</button></div>
+    </div>
+      <div className="join">
         <div>
-          <Link to="/">
-            <img src={EasyDEXlogo} className="mainPageLogo" />
-          </Link>
-        </div>
-
-        <div className="join">
-          <div>
-            <div className="form-control">
-              <input
-                className="input main-input input-bordered join-item"
-                placeholder="관심 있는 키워드를 입력하세요!"
-              />
-            </div>
-          </div>
-          <select className="select select-bordered join-item">
-            <option disabled selected>
-              Category
-            </option>
-            <option>Sci-fi</option>
-            <option>Drama</option>
-            <option>Action</option>
-          </select>
-          <div className="indicator">
-            <button className="btn join-item">Search</button>
+          <div className="form-control">
+            <input
+              className="input main-input input-bordered join-item"
+              placeholder="관심 있는 키워드를 입력하세요!"
+            />
           </div>
         </div>
-        <div>
-          <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-            {dexList.map((dex) => (
-              <SmallBlock dex={dex} />
-            ))}
-          </div>{" "}
+        <select className="select select-bordered join-item">
+          <option disabled selected>
+            Category
+          </option>
+          <option>Sci-fi</option>
+          <option>Drama</option>
+          <option>Action</option>
+        </select>
+        <div className="indicator">
+          <button className="btn join-item">Search</button>
         </div>
       </div>
+      <div>
+        {customDex?
+        (
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          {watchingDex.map((dex) => (
+            <SmallBlock dex={dex} />
+          ))}
+        </div>)
+   :(<div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          {dexList.map((dex) => (
+            <SmallBlock dex={dex} />))}
+        </div>)}{" "}
+      </div>
     </div>
-  );
+  </div>):
+  (
+    //이 부분이 기존에 만들었던 HomePage Layout
+    <div>
+    <div className="mainLayout">
+      <div>
+        <Link to="/">
+          <img src={EasyDEXlogo} className="mainPageLogo" />
+        </Link>
+      </div>
+      <div className="flex flex-col justify-center">
+    <div> <button onClick={() => handleDummyisUser()}>Dummy User Login Check button</button></div>
+    </div>
+      <div className="join">
+        <div>
+          <div className="form-control">
+            <input
+              className="input main-input input-bordered join-item"
+              placeholder="관심 있는 키워드를 입력하세요!"
+            />
+          </div>
+        </div>
+        <select className="select select-bordered join-item">
+          <option disabled selected>
+            Category
+          </option>
+          <option>Sci-fi</option>
+          <option>Drama</option>
+          <option>Action</option>
+        </select>
+        <div className="indicator">
+          <button className="btn join-item">Search</button>
+        </div>
+      </div>
+      <div>
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          {dexList.map((dex) => (
+            <SmallBlock dex={dex} />
+          ))}
+        </div>{" "}
+      </div>
+    </div>
+  </div>));
 };
 
 export default HomePage;
@@ -102,7 +159,92 @@ export default HomePage;
 // // 이 아래는 사용자 custon dexlist를 위해서 따로 분류해서 작성중
 // 그대로 둘 것
 
-//   isUser ?(
+  // isUser ?(
+  //   <div>
+  //   <div className="mainLayout">
+  //     <div>
+  //       <Link to="/">
+  //         <img src={EasyDEXlogo} className="mainPageLogo" />
+  //       </Link>
+  //     </div>
+  //     <div className="join">
+  //       <div>
+  //         <div className="form-control">
+  //           <input
+  //             className="input main-input input-bordered join-item"
+  //             placeholder="관심 있는 키워드를 입력하세요!"
+  //           />
+  //         </div>
+  //       </div>
+  //       <select className="select select-bordered join-item">
+  //         <option disabled selected>
+  //           Category
+  //         </option>
+  //         <option>Sci-fi</option>
+  //         <option>Drama</option>
+  //         <option>Action</option>
+  //       </select>
+  //       <div className="indicator">
+  //         <button className="btn join-item">Search</button>
+  //       </div>
+  //     </div>
+  //     <div>
+  //       {customDex?
+  //       (
+  //       <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+  //         {watchingDex.map((dex) => (
+  //           <SmallBlock dex={dex} />
+  //         ))}
+  //       </div>)
+  //  :(<div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+  //         {dexList.map((dex) => (
+  //           <SmallBlock dex={dex} />))}
+  //       </div>)}{" "}
+  //     </div>
+  //   </div>
+  // </div>):
+  // (
+  //   <div>
+  //   <div className="mainLayout">
+  //     <div>
+  //       <Link to="/">
+  //         <img src={EasyDEXlogo} className="mainPageLogo" />
+  //       </Link>
+  //     </div>
+  //     <div className="join">
+  //       <div>
+  //         <div className="form-control">
+  //           <input
+  //             className="input main-input input-bordered join-item"
+  //             placeholder="관심 있는 키워드를 입력하세요!"
+  //           />
+  //         </div>
+  //       </div>
+  //       <select className="select select-bordered join-item">
+  //         <option disabled selected>
+  //           Category
+  //         </option>
+  //         <option>Sci-fi</option>
+  //         <option>Drama</option>
+  //         <option>Action</option>
+  //       </select>
+  //       <div className="indicator">
+  //         <button className="btn join-item">Search</button>
+  //       </div>
+  //     </div>
+  //     <div>
+  //       <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+  //         {dexList.map((dex) => (
+  //           <SmallBlock dex={dex} />
+  //         ))}
+  //       </div>{" "}
+  //     </div>
+  //   </div>
+  // </div>)
+
+
+
+  //   isUser ?(
 //   <div>
 //     <div className="mainLayout">
 //       <div className="form-control">
@@ -131,22 +273,3 @@ export default HomePage;
 //       </div>
 //     </div>
 //   </div> ):
-//   (
-//     <div>
-//       <div className="mainLayout">
-//         <div className="form-control">
-//           <input
-//             type="text"
-//             placeholder="관심 있는 키워드를 검색해보세요!"
-//             className="main-input input-bordered "
-//           />
-//         </div>
-//         <div>
-//           <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-//             {dexes.map((dex) => (
-//               <SmallBlock dex={dex} />
-//             ))}
-//           </div>{" "}
-//         </div>
-//       </div>
-//     </div> );
