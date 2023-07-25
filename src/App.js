@@ -10,8 +10,12 @@ import BigBlockPage from "./routes/BigBlockPage";
 import SignUpPage from "./routes/SignUpPage";
 import SignInPage from "./routes/SignInPage";
 import MyPage from "./routes/MyPage";
+import { useLayoutEffect } from "react";
 
 function App() {
+  useLayoutEffect(() => {
+    document.documentElement.setAttribute("data-theme", "light");
+  }, []);
   return (
     <div className="app">
       <link
@@ -38,7 +42,7 @@ function App() {
 
           {/* <Route path="/create" element={<PostCreatePage />} /> */}
         </Routes>
-        
+
         <Footer />
       </BrowserRouter>
     </div>

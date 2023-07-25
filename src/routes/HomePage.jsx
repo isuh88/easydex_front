@@ -5,11 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { BigBlock, SmallBlock } from "../components/Block";
 import { getDexes, pullDexes, getUser } from "../apis/api";
-import {
-  getCookie,
-  getSessionStorage,
-  setSessionStorage,
-} from "../utils/cookie";
+import { getCookie, getSessionStorage, setSessionStorage} from "../utils/cookie";
 import EasyDEXlogo from "../assets/images/EasyDEX_logo.png";
 
 const HomePage = () => {
@@ -25,6 +21,7 @@ const HomePage = () => {
     customDex ? setCustomDex(false) : setCustomDex(true);
   };
   const [isUser, setIsUser] = useState("");
+
   const handleDummyisUser = ()=>{
     isUser ? setIsUser(false) : setIsUser(true);
     if(isUser){
@@ -44,10 +41,12 @@ const HomePage = () => {
   //     const dexes = await getDexes();
   //     setDexList(dexes);
   //     // console.log(dexes);
+
   useEffect(() => {
     const user = getCookie("access_token") ? true : false;
     setIsUser(user);
   }, []);
+  
 
   // //여기서 dexList, watchDexList를 컨트롤중임... 로직 수정 필요
   // const [watchDex, setWatchList] = useState(getSessionStorage('cachedWatchingDexList'));
@@ -96,16 +95,28 @@ const HomePage = () => {
         </div>
       </div>
       <div>
+      <Link to="/dexlist/">
+            전체 지표 목록 보기
+          </Link>
         {customDex?
         (
         <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-          {watchingDex.map((dex) => (
-            <SmallBlock dex={dex} />
-          ))}
+          {watchingDex.length === 0 ? (
+          // dexList 배열의 길이가 0인 경우 로딩 화면 표시
+          <p>Loading...</p>
+          ) : (
+            // dexList 배열의 길이가 1 이상인 경우 데이터를 매핑하여 보여줌
+            watchingDex.map((dex) => <SmallBlock dex={dex} />)
+          )}
         </div>)
    :(<div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-          {dexList.map((dex) => (
-            <SmallBlock dex={dex} />))}
+          {dexList.length === 0 ? (
+          // dexList 배열의 길이가 0인 경우 로딩 화면 표시
+          <p>Loading...</p>
+          ) : (
+            // dexList 배열의 길이가 1 이상인 경우 데이터를 매핑하여 보여줌
+            dexList.map((dex) => <SmallBlock dex={dex} />)
+          )}
         </div>)}{" "}
       </div>
     </div>
@@ -144,14 +155,22 @@ const HomePage = () => {
         </div>
       </div>
       <div>
-        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-          {dexList.map((dex) => (
-            <SmallBlock dex={dex} />
-          ))}
+      <Link to="/dexlist/">
+            전체 지표 목록 보기
+          </Link>
+          <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          {dexList.length === 0 ? (
+          // dexList 배열의 길이가 0인 경우 로딩 화면 표시
+          <p>Loading...</p>
+          ) : (
+            // dexList 배열의 길이가 1 이상인 경우 데이터를 매핑하여 보여줌
+            dexList.map((dex) => <SmallBlock dex={dex} />)
+          )}
+
+          </div>{" "}
         </div>{" "}
       </div>
-    </div>
-  </div>));
+    </div>))
 };
 
 export default HomePage;

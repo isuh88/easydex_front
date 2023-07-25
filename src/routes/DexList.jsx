@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DexBlock } from "../components/DexBlock";
 import useDexList from "../data/dex";
 import { BigBlock,SmallBlock } from "../components/Block/index";
 import { Tag } from "../components/Block/tag";
 import { Link } from "react-router-dom";
-import { getSessionStorage } from "../utils/cookie";
-import { watchDex } from "../apis/api";
+import { getSessionStorage, getCookie } from "../utils/cookie";
+import { watchDex, getUser } from "../apis/api";
 
 const DexListPage = () => {
   // const dexList = useDexList();
   // const { dexList, watchDexList } = useDexList();
   const dexList = getSessionStorage('cachedDexList');
-  dexList.map((dex) => (
-    console.log(dex.tags)
-    ))
-  // console.log(`DexList is ${dexList}`);
+  const [isEdit, setIsEdit] = useState(false);
+  const [isUser, setIsUser] = useState("");
+  useEffect(() => {
+    const user = getCookie("access_token") ? true : false;
+    setIsUser(user);
+  }, []);
+
+  // dexList.map((dex) => (
+  //   console.log(dex.tags)
+  //   ))
+  // // console.log(`DexList is ${dexList}`);
 
   const handleChange = (e) => {};
 
@@ -61,7 +68,7 @@ const DexListPage = () => {
                     <td class="whitespace-nowrap px-6 py-4">@twitter</td>
                   </tr> */}
                   {dexList.map((dex)=>(
-                    <DexInfo dex={dex} />
+                    <DexInfo dex={dex} isUser={isUser}/>
                   ))}
                 </tbody>
               </table>
@@ -75,10 +82,9 @@ const DexListPage = () => {
 
 export default DexListPage;
 
-const DexInfo = ({dex}) =>{
+const DexInfo = ({dex, isUser}) =>{
 // 순서  1. id, 2. title, 3. closing, 4. tags
 // 3번째 td에 5000을 추후 dex.closing으로 수정
-
 
 const onClickWatch = () => {
   watchDex(dex.id);
@@ -96,9 +102,12 @@ return (<>
       {dex.title}
     </Link>
 
-    <button className="btn btn-xs" onClick={onClickWatch}>
-              ❤️
-    </button>
+  
+    {isUser && (
+      <button className="btn btn-xs" onClick={onClickWatch}>
+        ❤️
+      </button>
+    )}
 
   </td>
   <td class="whitespace-nowrap px-6 py-4">5000</td>

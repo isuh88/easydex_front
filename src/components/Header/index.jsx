@@ -16,6 +16,8 @@ const Header = () => {
     setIsUser(user);
   }, []);
 
+  console.log(isUser);
+
   const handleLogout = () => {
     const token = getCookie("refresh_token");
     logOut(token);
@@ -46,7 +48,6 @@ const Header = () => {
                   sign In
                 </Link>
                 <Link to="/signup" className="btn btn-ghost p-3 uppercase">
-
                   sign up
                 </Link>
               </>
@@ -56,7 +57,6 @@ const Header = () => {
                   my page
                 </Link>
                 <Link to="/" onClick={handleLogout} className="p-3 uppercase">
-
                   log out
                 </Link>
               </>
