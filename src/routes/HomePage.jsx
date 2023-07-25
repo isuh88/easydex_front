@@ -20,21 +20,11 @@ const HomePage = () => {
   //로그인 여부를 판정하기 위해 사용
   const [isUser, setIsUser] = useState("");
   const [watchingDex, setWatchingDex] = useState([]);
-  // useEffect(() => {
-  //   const user = getCookie("access_token") ? true : false;
-  //   setIsUser(user);
-  // }, []);
-
-  // useEffect(() => {
-  //   const getDexesAPI = async () => {
-  //     await pullDexes();
-  //     const dexes = await getDexes();
-  //     setDexList(dexes);
-  //     // console.log(dexes);
   useEffect(() => {
     const user = getCookie("access_token") ? true : false;
     setIsUser(user);
   }, []);
+  
 
   // //여기서 dexList, watchDexList를 컨트롤중임... 로직 수정 필요
   // const [watchDex, setWatchList] = useState(getSessionStorage('cachedWatchingDexList'));
@@ -86,11 +76,20 @@ const HomePage = () => {
           </div>
         </div>
         <div>
+        <Link to="/dexlist/">
+            전체 지표 목록 보기
+          </Link>
           <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-            {dexList.map((dex) => (
-              <SmallBlock dex={dex} />
-            ))}
+          {dexList.length === 0 ? (
+          // dexList 배열의 길이가 0인 경우 로딩 화면 표시
+          <p>Loading...</p>
+          ) : (
+            // dexList 배열의 길이가 1 이상인 경우 데이터를 매핑하여 보여줌
+            dexList.map((dex) => <SmallBlock dex={dex} />)
+          )}
+
           </div>{" "}
+
         </div>
       </div>
     </div>
