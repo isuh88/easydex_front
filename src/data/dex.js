@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { getDexes, pullDexes, getUser } from "../apis/api";
+import {
+  getDexes,
+  pullDexes,
+  pullDexHistory,
+  updateDexWithTag,
+} from "../apis/api";
 import {
   getCookie,
   setSessionStorage,
@@ -12,6 +17,33 @@ const useDexList = () => {
   const [isUser, setIsUser] = useState("");
 
   useEffect(() => {
+    const updateData = async (firstDexList) => {
+      if (!firstDexList || firstDexList.length === 0) {
+        await pullDexes();
+        const secondDexList = await getDexes();
+        if (secondDexList.some((dex) => dex.tags === null)) {
+          const jsonObject = {
+            indices: secondDexList.map((item) => String(item.id)),
+          };
+
+          // Pull all dex history first
+          await Promise.all(
+            secondDexList.map(async function (data) {
+              await pullDexHistory(data.id, jsonObject);
+              console.log(`${data.id} pullDexHistory complete`);
+            })
+          );
+
+          // Now update all dex with tags
+          await Promise.all(
+            secondDexList.map(async function (data) {
+              await updateDexWithTag(data.id, jsonObject);
+            })
+          );
+        }
+      }
+    };
+
     const fetchData = async () => {
       try {
         const user = getCookie("access_token") ? true : false;
@@ -19,16 +51,16 @@ const useDexList = () => {
 
         // 최초 접속 시에는 localStorage에서 dexList를 불러옵니다.
         const cachedDexes = getSessionStorage("cachedDexList");
-
         if (cachedDexes) {
           setCachedDexList(cachedDexes);
         } else {
-          await pullDexes();
+          const firstDexList = await getDexes();
+          await updateData(firstDexList);
           const dexes = await getDexes();
+
+          //Front에서 가공할 수 있게 data를 전처리하는 로직
           dexes.map(function (dex) {
-            console.log(dex.tags);
             if (typeof dex.tags === "string") {
-              console.log(dex.tags);
               const jsonTags = JSON.parse(dex.tags.replace(/'/g, '"'));
               const dexTags = Object.keys(jsonTags)
                 .sort((a, b) => jsonTags[b] - jsonTags[a])

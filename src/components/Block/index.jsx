@@ -2,25 +2,19 @@ import { Link } from "react-router-dom";
 import useDexList from "../../data/dex";
 import { Tag } from "./tag";
 import { useState, useEffect } from "react";
-import ModalBasic from "./modalBasic";
 import { watchDex, getDexes, getDexesAPI, pullDexes } from "../../apis/api";
 import { getSessionStorage } from "../../utils/cookie";
-import { Chart } from "./chart";
+import { Chart, LineChart } from "./chart";
+import { Line } from "react-chartjs-2";
 
 export const SmallBlock = ({ dex }) => {
-  // 차트 제작
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>;
-  const [modalOpen, setModalOpen] = useState(false);
-  const showModal = () => {
-    setModalOpen(true);
-  };
 
   function getRandom(length) {
     return Math.floor(Math.random() * length);
   }
 
   var randomTag = [];
-  console.log("before RandomTag");
+  // console.log("before RandomTag");
   if (dex.tags.length) {
     //임시조치. 연관도 기준으로 오는 dex.tags와(자기자신 포함하므로 유의),
     //dex.tags 제외하고 randomTag로 한 놈만 뽑을 수 있도록!
@@ -53,7 +47,7 @@ export const SmallBlock = ({ dex }) => {
                   {dex.title}
                 </Link>
               </div>
-              <p>{dex.value}</p>
+              <p>{dex.closing}</p>
             </div>
             <div className="flex-col justify-center">
               {randomTag.length ? (
@@ -68,10 +62,7 @@ export const SmallBlock = ({ dex }) => {
             </div>
           </div>
           <div>
-            <img src="/assets/images/lion.jpeg" alt="오류" />
-            <div>
-              <canvas id="myChart"></canvas>
-            </div>
+            <LineChart dex={dex}/>
           </div>
         </div>
       </div>
@@ -97,7 +88,7 @@ export const SmallBlock = ({ dex }) => {
                   {dex.title}
                 </Link>
               </div>
-              <p>{dex.value}</p>
+              <p>{dex.closing}</p>
             </div>
             <div className="flex-col">
               {randomTag.length ? (
@@ -112,7 +103,7 @@ export const SmallBlock = ({ dex }) => {
             </div>
           </div>
           <div>
-            <img src="/assets/images/lion.jpeg" alt="오류" />
+            <LineChart dex={dex}/>
           </div>
         </div>
       </div>
@@ -191,7 +182,7 @@ export const BigBlock = ({ dex }, index) => {
               <div className="flex flex-row">
                 <p>{dex.closing}</p>
                 <div className="h-[300px]">
-                  <p>graph</p>
+                <LineChart dex={dex}/>
                 </div>
               </div>
               <div className="divider divider-horizontal"></div>
@@ -231,7 +222,7 @@ export const BigBlock = ({ dex }, index) => {
               <div className="flex flex-col">
                 <p>{dex.closing}</p>
                 <div className="h-[300px]">
-                  <p>graph</p>
+                <LineChart dex={dex}/>
                 </div>
               </div>
               <div className="divider divider-horizontal"></div>
