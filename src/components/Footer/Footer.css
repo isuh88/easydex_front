@@ -48,7 +48,7 @@ footer .copyright-container .copyright {
 .footer-routes .footer-route {
   display: flex !important;
   flex-direction: column !important;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
   text-align: center;
   padding: 10px 0 10px 100px;
