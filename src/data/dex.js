@@ -30,7 +30,7 @@ const useDexList = () => {
           await Promise.all(
             secondDexList.map(async function (data) {
               await pullDexHistory(data.id, jsonObject);
-              console.log(`${data.id} pullDexHistory complete`);
+              console.log(`${data.id} values is ${data.values}`);
             })
           );
 
@@ -46,9 +46,6 @@ const useDexList = () => {
 
     const fetchData = async () => {
       try {
-        const user = getCookie("access_token") ? true : false;
-        setIsUser(user);
-
         // 최초 접속 시에는 localStorage에서 dexList를 불러옵니다.
         const cachedDexes = getSessionStorage("cachedDexList");
         if (cachedDexes) {
@@ -73,16 +70,6 @@ const useDexList = () => {
           // 최초로 받아온 dexList를 localStorage에 저장합니다.
           setSessionStorage("cachedDexList", dexes);
         }
-
-        if (isUser) {
-          const watchingDex = cachedDexList.filter(
-            (dex) => dex.watching_users.includes(user.id) > 0
-          );
-          setCachedWatchDexList(watchingDex);
-        }
-        // setSessionStorage('cachedWatchingDexList', cachedWatchDexList)
-
-        // console.log(cachedDexList);
       } catch (error) {
         console.error(
           "지표 데이터를 가져오는 도중 오류가 발생했습니다:",
@@ -94,7 +81,7 @@ const useDexList = () => {
     fetchData();
   }, []);
 
-  return { dexList: cachedDexList, watchDexList: cachedWatchDexList };
+  return cachedDexList;
 };
 
 export default useDexList;
