@@ -18,11 +18,6 @@ const DexListPage = () => {
     setIsUser(user);
   }, []);
 
-  // dexList.map((dex) => (
-  //   console.log(dex.tags)
-  //   ))
-  // // console.log(`DexList is ${dexList}`);
-
   const handleChange = (e) => {};
 
   return (
@@ -88,14 +83,6 @@ const DexInfo = ({dex, dexList, isUser}) =>{
 
 const onClickWatch = async () => {
   watchDex(dex.id);
-  const tempDex = await getDex(dex.id);
-  dexList.map(dexItem => {
-    if (dexItem.id === dex.id) {
-      dexItem.watching_users = tempDex.watching_users;
-    }
-  });
-  setSessionStorage('cachedDexList', dexList);
-  
 };
 
 
